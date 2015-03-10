@@ -8,8 +8,17 @@ git:
 node_js:
   - "0.12"
 
+env:
+  matrix:
+    - RUBY_VERSION=1.9.3
+    - RUBY_VERSION=2.0
+    - RUBY_VERSION=2.1
+    - RUBY_VERSION=2.2
+
 before_install:
-  - rvm use 1.9.3
+  - rvm install $RUBY_VERSION
+  - rvm use $RUBY_VERSION --fuzzy
+  - export GEMDIR=$(rvm gemdir)
 
 install:
   - travis_retry npm install -g grunt-cli
